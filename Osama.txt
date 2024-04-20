@@ -1,0 +1,4 @@
+thisisapassword
+True
+cleaning!Sat Apr 20 11:55:55 2024@bigboy#clean room this room$Sun Apr 21 11:55:55 2024*False
+Buy cake!Sat Apr 20 11:55:55 2024@Ultra_bigboy#Buy a cake from cake shop$Sun Apr 21 11:55:55 2024*False
