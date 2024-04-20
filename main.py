@@ -22,7 +22,7 @@ if "True" in userdetails[0]:
 
     user = int(input())
 
-    print("Press 1: To add Task\nPress 2: To remove Task ")
+    print("Press 1: To add Task\nPress 2: To remove Task\nPress 3: To veiw Task ")
 
     op = int(input())
 
@@ -35,6 +35,11 @@ if "True" in userdetails[0]:
         due = now + datetime.timedelta(days=int(dates[0:loc]),hours=int(dates[loc+1:len(dates)]))
 
         Task.add_task(listOfUser[user],username,name,des,due,time.ctime())
+    elif op == 3:
+        details = Task.get_task(listOfUser[user])
+        for detail in details:
+            print(detail)
+        
 
 
 
