@@ -20,7 +20,6 @@ class taskboss():
             file.write("\n")
             file.write(content)
 
-
     def get_task(self,username):
         read = []
         with open(username+".txt","r") as file:
@@ -65,6 +64,8 @@ class taskboss():
                             read.append(line)
                         else:
                             break
+                else:
+                    return "incorrect Password"
             return read
         except FileNotFoundError:
             return "Invaild username_"+username
