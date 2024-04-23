@@ -1,5 +1,16 @@
 class taskboss():
 
+    def signup(self,username,password,is_admin):
+        with open("userdetail.txt","a") as file:
+            file.write("\n")
+            file.write(str(username))
+        with open(username+".txt","a") as file:
+            file.write(str(password))
+            file.write("\n")
+            file.write(str(is_admin))
+        return "account created successfully"
+        
+
     def remove_task(self,r_task,username):
         print(r_task)
 
@@ -44,6 +55,7 @@ class taskboss():
     def login(self,username,password):
         read = []
         try:
+            print(username)
             with open(username+".txt","r") as file:
                 line = file.readline().strip()
                 if password == line:
@@ -54,7 +66,6 @@ class taskboss():
                         else:
                             break
             return read
-
         except FileNotFoundError:
             return "Invaild username_"+username
         

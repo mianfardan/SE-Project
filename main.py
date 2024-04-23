@@ -5,7 +5,10 @@ Task = taskboss()
 task_list = []
 
 userdetails = []
-username = input("Enter username: ")
+username = input("Enter username(enter 420 to make a new account): ")
+if username == "420":
+    username = input("Enter a username: ")
+    Task.login(username,str(input("Enter a Password: ")),False)
 userdetails = Task.login(username,input("Enter Password: "))
 
 print("Welcome "+username)
