@@ -1,19 +1,23 @@
 from task import taskboss 
 import time,datetime
 
-Task = taskboss()#change
+Task = taskboss()
 task_list = []
 
 userdetails = []
 username = input("Enter username(enter 420 to make a new account): ")
 if username == "420":
     username = input("Enter a username: ")
-    Task.login(username,str(input("Enter a Password: ")),False)
-userdetails = Task.login(username,input("Enter Password: "))
+    passcode = input("Enter a Password: ")
+    Task.signup(username,passcode,"False")
+    userdetails = Task.login(username,passcode)
+else:
+    userdetails = Task.login(username,input("Enter Password: "))#logging in returns a array
+
 
 print("Welcome "+username)
 
-if "True" in userdetails[0]:
+if "True" in userdetails[0]:# if admin
     print("Select a User")
     user = int(0)
     listOfUser = Task.admin_list()
@@ -33,13 +37,13 @@ if "True" in userdetails[0]:
     if op == 1 :
         name = str(input("Enter Task name "))
         des = str(input("Enter a task description "))
-        dates = str(input("Enter the given days and hours in dd/hh "))
+        dates = str(input("Enter the given days and hours in dd/hh ")) #error handling needed
         loc = dates.find("/")
         now = datetime.datetime.today()
         due = now + datetime.timedelta(days=int(dates[0:loc]),hours=int(dates[loc+1:len(dates)]))
 
         Task.add_task(listOfUser[user],username,name,des,due,time.ctime())
-    elif op == 3:
+    elif op == 3:# add code for empty array
         details = Task.get_task(listOfUser[user])
         for detail in details:
             print(detail)
@@ -53,8 +57,10 @@ if "True" in userdetails[0]:
 
 
         
-else:
+else:# if not admin
     details = Task.get_task(username)
     for detail in details:
         print(detail)
+        
+    
 
