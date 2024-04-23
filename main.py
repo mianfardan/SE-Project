@@ -1,4 +1,4 @@
-from task import taskboss #code by fardan
+from task import taskboss 
 import time,datetime
 
 Task = taskboss()
@@ -11,6 +11,7 @@ userdetails = Task.login(username,input("Enter Password: "))
 print("Welcome "+username)
 
 if "True" in userdetails[0]:
+    print("Select a User")
     user = int(0)
     listOfUser = Task.admin_list()
     
@@ -39,12 +40,16 @@ if "True" in userdetails[0]:
         details = Task.get_task(listOfUser[user])
         for detail in details:
             print(detail)
+    elif op == 2:
+        details = Task.get_task(listOfUser[user])
+        for detail in details:
+            print(detail)
+        op = int(input())
+
+        Task.remove_task(details[op],listOfUser[user])
+
+
         
-
-
-
-
-
 else:
     details = Task.get_task(username)
     for detail in details:

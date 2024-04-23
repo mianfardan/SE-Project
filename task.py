@@ -1,5 +1,7 @@
 class taskboss():
 
+    def remove_task(self,r_task,username):
+        print(r_task)
 
     def add_task(self,touser,username,name,des,due,now):
         with open(touser+".txt","a") as file:
