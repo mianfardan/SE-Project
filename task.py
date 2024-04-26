@@ -31,7 +31,33 @@ class taskboss():
      # coded by huzaifa
 
     def remove_task(self,r_task,username): #removing a particular task from the list
-        print(r_task)#pendding
+        reads = []
+        loc = r_task.find("|")
+        find = r_task[20:loc-1]
+        with open(username+".txt","r") as file:
+            while True:
+                line = file.readline().strip()
+                if line:
+                    reads.append(line)
+                else:
+                    break
+        for read in reads:
+            loc = read.find("!")
+            if read[0:loc] == find and loc != -1:
+                reads.remove(read)
+                break
+
+        with open(username+".txt","w") as file:
+            file.write(reads[0])
+            reads.remove(reads[0])
+            for read in reads:
+                file.write("\n")
+                file.write(read)
+
+        return "Successfull"
+        
+
+        
 
 
 
