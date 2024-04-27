@@ -1,7 +1,7 @@
 from datetime import datetime
 class taskboss():
 
-    def make_admin(self,user):
+    def make_admin(self,user):# Fardan
         reads = []
         with open(user+".txt","r") as file:
             while True:
@@ -20,7 +20,7 @@ class taskboss():
                 file.write(reads[i])
         return "Successfull"
 
-    def reporting(self):
+    def reporting(self):# Fardan
         report = []
         username = self.admin_list()
         for user in username:
@@ -49,10 +49,7 @@ class taskboss():
     
         return report
 
-
-    # coded by zoha & hammad
-
-    def signup(self,username,password):
+    def signup(self,username,password):# Hammad
         users = []
         with open("userdetail.txt","r") as file:#checking amount of users in system
             while True:
@@ -80,7 +77,7 @@ class taskboss():
         
      # coded by huzaifa
 
-    def remove_task(self,r_task,username): #removing a particular task from the list
+    def remove_task(self,r_task,username): #removing a particular task from the list Huzaifa
         reads = []
         loc = r_task.find("|")
         find = r_task[20:loc-1]
@@ -106,13 +103,13 @@ class taskboss():
 
         return "Successfull"
     
-    def add_task(self,touser,username,name,des,due,now,priority): #adding tasks to other people's tasklist
+    def add_task(self,touser,username,name,des,due,now,priority): #adding tasks to other people's tasklist huzaifa
         with open(touser+".txt","a") as file:
             content = str(name)+"!"+str(now)+"@"+str(username)+"#"+str(des)+"$"+str(due)+"*False"+"^"+priority
             file.write("\n")
             file.write(content)
 
-    def get_task(self,username):  #getting all tasks from the users tasklist
+    def get_task(self,username):  #getting all tasks from the users tasklist zoha
         read = []
         with open(username+".txt","r") as file:
             line = file.readline().strip()
@@ -153,7 +150,7 @@ class taskboss():
     
     # coded by mian fardan
     
-    def admin_list(self):  #returning list of all registered users
+    def admin_list(self):  #returning list of all registered users Abdul...
        reads = []
        with open("userdetail.txt","r") as file:
             while True:
@@ -164,7 +161,7 @@ class taskboss():
                     return reads
                 
             
-    def login(self,username,password):  # logging in
+    def login(self,username,password):  # logging in zoha
         read = []
         try:
             with open(username+".txt","r") as file:
