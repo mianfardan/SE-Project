@@ -13,7 +13,7 @@ class taskboss():
 
         reads[1] = "True"
 
-        with open(user+".txt","r") as file:
+        with open(user+".txt","w") as file:
             file.write(reads[0])
             for i in range(1,len(reads)):
                 file.write("\n")
@@ -22,12 +22,12 @@ class taskboss():
 
     def reporting(self):
         report = []
-        all_task = []
         username = self.admin_list()
-        c = 0
-        t = 0
-        p = 0
         for user in username:
+            all_task = []
+            c = 0
+            t = 0
+            p = 0
             with open(user+".txt","r") as file :
                 line = file.readline().strip()
                 line = file.readline().strip()

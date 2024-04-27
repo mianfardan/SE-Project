@@ -40,7 +40,7 @@ if "True" in userdetails[0]:# if admin
 
     user = int(input())
 
-    print("Press 1: To add Task\nPress 2: To remove Task\nPress 3: To veiw Task\nPress 4: To Genarate Report of all users\n Press 5: To Make a admin ")
+    print("Press 1: To add Task\nPress 2: To remove Task\nPress 3: To veiw Task\nPress 4: To Genarate Report of all users\nPress 5: To Make a admin ")
 
     op = int(input())
 
