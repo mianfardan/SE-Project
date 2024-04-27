@@ -40,7 +40,7 @@ if "True" in userdetails[0]:# if admin
 
     user = int(input())
 
-    print("Press 1: To add Task\nPress 2: To remove Task\nPress 3: To veiw Task ")
+    print("Press 1: To add Task\nPress 2: To remove Task\nPress 3: To veiw Task\nPress 4: To Genarate Report of all users\n Press 5: To Make a admin ")
 
     op = int(input())
 
@@ -48,12 +48,25 @@ if "True" in userdetails[0]:# if admin
         # Adding a new task
         name = str(input("Enter Task name: "))
         des = str(input("Enter a task description: "))
-        dates = str(input("Enter the given days and hours in dd/hh: ")) #error handling needed
+        while True:
+            priority = int(input("Enter a priority from 1 to 10 where 10 is high priority "))
+            if priority >= 1 and priority <= 10:
+                break
+            else:
+                print("You have enter a invaild entry\nTry Agian")
+                time.sleep(1)
+        while True:
+            dates = str(input("Enter the given days and hours in dd/hh: "))
+            if "/" in dates and len(dates) >= 3:
+                break
+            else:
+                print("You have enter a invaild entry\nTry Agian")
+                time.sleep(1)
         loc = dates.find("/")
         now = datetime.datetime.today()
         due = now + datetime.timedelta(days=int(dates[0:loc]),hours=int(dates[loc+1:len(dates)]))
 
-        Task.add_task(listOfUser[user],username,name,des,due,time.ctime())
+        Task.add_task(listOfUser[user],username,name,des,due,time.ctime(),str(priority))
 
         # Viewing tasks 
     elif op == 3:# add code for empty array
@@ -68,6 +81,15 @@ if "True" in userdetails[0]:# if admin
         op = int(input())
 
         Task.remove_task(details[op],listOfUser[user])
+    elif op == 4:
+        reports = Task.reporting()
+
+        for report in reports:
+            print(report)
+            time.sleep(1)
+    elif op == 5:
+
+        print(Task.make_admin(listOfUser[user]))
 
 
         
@@ -77,8 +99,6 @@ else:# if not an admin
     details = Task.get_task(username)
     for detail in details:
         print(detail)
-        
-    op = int(input())
     
     #add complete task here
 

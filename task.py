@@ -1,4 +1,54 @@
+from datetime import datetime
 class taskboss():
+
+    def make_admin(self,user):
+        reads = []
+        with open(user+".txt","r") as file:
+            while True:
+                line = file.readline().strip()
+                if line:
+                    reads.append(line)
+                else:
+                    break
+
+        reads[1] = "True"
+
+        with open(user+".txt","r") as file:
+            file.write(reads[0])
+            for i in range(1,len(reads)):
+                file.write("\n")
+                file.write(reads[i])
+        return "Successfull"
+
+    def reporting(self):
+        report = []
+        all_task = []
+        username = self.admin_list()
+        c = 0
+        t = 0
+        p = 0
+        for user in username:
+            with open(user+".txt","r") as file :
+                line = file.readline().strip()
+                line = file.readline().strip()
+                while True:
+                    line = file.readline().strip()
+                    if line:
+                        all_task.append(line)
+                    else:
+                        break
+            
+            t = len(all_task)
+
+            for tasks in all_task:
+                if "*False" in tasks:
+                    p += 1
+            c = t - p
+
+            report.append(user+" has "+str(t)+" Task(s) and have completed "+str(c)+" Task(s) and has "+str(p)+" Pendding Task(s)")
+    
+        return report
+
 
     # coded by zoha & hammad
 
@@ -55,15 +105,10 @@ class taskboss():
                 file.write(read)
 
         return "Successfull"
-        
-
-        
-
-
-
-    def add_task(self,touser,username,name,des,due,now): #adding tasks to other people's tasklist
+    
+    def add_task(self,touser,username,name,des,due,now,priority): #adding tasks to other people's tasklist
         with open(touser+".txt","a") as file:
-            content = str(name)+"!"+str(now)+"@"+str(username)+"#"+str(des)+"$"+str(due)+"*False"
+            content = str(name)+"!"+str(now)+"@"+str(username)+"#"+str(des)+"$"+str(due)+"*False"+"^"+priority
             file.write("\n")
             file.write(content)
 
@@ -75,9 +120,27 @@ class taskboss():
             while True:
                 line = file.readline().strip()
                 if line:
-                    read.append(line)
+                    if "*False" in line:
+                        read.append(line)
                 else:
                     break
+        for k in range(0,len(read)):
+            temp = ""
+            for i in range(0,len(read)):
+                if temp:
+                    if int(temp[temp.find("^")+1:len(temp)]) < int(read[i][read[i].find("^")+1:len(read[i])]):
+                        temp2 = read[i]
+                        read[i] = temp
+                        read[i-1] = temp2
+                        temp = ""
+                    elif (temp[temp.find("^")+1:len(temp)]) == int(read[i][read[i].find("^")+1:len(read[i])]):
+                        if datetime(datetime.strptime((temp[temp.find("$")+1:temp.find("*")]),'%Y-%m-%d %H:%M:%S.%f')) - datetime(datetime.strptime((read[i][read[i].find("$")+1:read[i].find("*")]),'%Y-%m-%d %H:%M:%S.%f')) > 0:
+                            temp2 = read[i]
+                            read[i] = temp
+                            read[i-1] = temp2
+                            temp = ""
+                temp = read[i]
+
         for i in range(0,len(read)): 
             read[i] = "Press "+str(i)+": "+"Task name :"+read[i]
             read[i] = read[i].replace("!"," | Date Assigen: ")
@@ -85,6 +148,7 @@ class taskboss():
             read[i] = read[i].replace("#"," | Description: ")
             read[i] = read[i].replace("$"," | Due Date: ")
             read[i] = read[i].replace("*"," | Date Competed: ")
+            read[i] = read[i].replace("^"," | Priority: ")
         return read
     
     # coded by mian fardan
@@ -117,8 +181,3 @@ class taskboss():
             return read
         except FileNotFoundError:
             return "Invaild Username_"+username
-        
-
-    
-    
-
