@@ -78,5 +78,7 @@ else:# if not an admin
     for detail in details:
         print(detail)
         
+    op = int(input())
     
+    #add complete task here
 
