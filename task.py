@@ -1,6 +1,9 @@
 from datetime import datetime
 class taskboss():
 
+    def complete_task(self,user,task):
+        pass
+
     def make_admin(self,user):# Fardan
         reads = []
         with open(user+".txt","r") as file:
