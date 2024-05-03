@@ -1,8 +1,34 @@
 from datetime import datetime
 class taskboss():
 
-    def complete_task(self,user,task):
-        pass
+    def complete_task(self,user,c_task):
+        reads = []
+        temp = ""
+        loc = c_task.find("|")
+        find = c_task[20:loc-1]
+        with open(user+".txt","r") as file:
+            while True:
+                line = file.readline().strip()
+                if line:
+                    reads.append(line)
+                else:
+                    break
+        for read in reads:
+            loc = read.find("!")
+            if read[0:loc] == find and loc != -1:
+                temp = read
+                reads.remove(read)
+                break
+        hold = temp[temp.find("^"):len(temp)]
+        temp = temp[0:temp.find("*")] + "*"+str(datetime.today())+hold
+        reads.append(temp)
+        with open(user+".txt","w") as file:
+            file.write(reads[0])
+            reads.remove(reads[0])
+            for read in reads:
+                file.write("\n")
+                file.write(read)
+        return "Sucessfull"
 
     def make_admin(self,user):# Fardan
         reads = []
@@ -181,3 +207,8 @@ class taskboss():
             return read
         except FileNotFoundError:
             return "Invaild Username_"+username
+        
+
+Task = taskboss()
+here = (Task.get_task("huzaifa"))
+print(Task.complete_task("huzaifa",here[0]))
