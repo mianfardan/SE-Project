@@ -1,5 +1,6 @@
 from task import taskboss # Huzaifa and fardan
-import time,datetime,winsound
+import time,datetime
+#,winsound
 
 #to playstartup sound
 #filename = 'myfile.wav'# replace myfile.wav with the audio file
@@ -13,10 +14,10 @@ task_list = []
 userdetails = []
 
 # Prompting the user for username 
-username = input("Enter username(Enter 420 to make a new account): ")
+username = input("Enter username(Enter 'new' to make a new account): ")
 
 # If the user wants to create a new account  they  enter "420"
-if username == "420":
+if username.lower() == "new":
     username = input("Enter a username: ")
     passcode = input("Enter a Password: ")
 
@@ -28,7 +29,7 @@ else:
     userdetails = Task.login(username,input("Enter Password: "))#logging in returns a array
 
 # If login is successfully
-print("Welcome "+username)
+print("Welcome "+username+"\n")
 
 if "True" in userdetails[0]:# if admin
     print("Select a User")
@@ -92,10 +93,18 @@ if "True" in userdetails[0]:# if admin
             print(report)
             time.sleep(1)
     elif op == 5:
-
         print(Task.make_admin(listOfUser[user]))
     elif op ==6:#add compelete task here
-        pass
+        details = Task.get_task(listOfUser[user])
+        if len(details) > 0:
+            for detail in details:
+                print(detail)
+            op = int(input())
+            print(Task.complete_task(listOfUser[user],details[op]))
+        else:
+            print("All tasks are done")
+    else:
+        print("Please open your eyes and enter a valid entry")
 
 
         
@@ -105,6 +114,8 @@ else:# if not an admin
     details = Task.get_task(username)
     for detail in details:
         print(detail)
-    
-    #add complete task here
-
+    if len(details) > 0:
+        op = int(input())
+        print(Task.complete_task(username,details[op]))
+    else:
+        print("Respected "+username+",\nYou have not been assigned a new task yet.\nHave a great day.")

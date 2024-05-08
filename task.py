@@ -1,7 +1,9 @@
 from datetime import datetime
+import time
 class taskboss():
 
     def complete_task(self,user,c_task):
+        print(c_task)
         reads = []
         temp = ""
         loc = c_task.find("|")
@@ -203,12 +205,9 @@ class taskboss():
                         else:
                             break
                 else:
-                    return "Incorrect Password"
+                    print("Incorrect usernsme or Password")
             return read
         except FileNotFoundError:
-            return "Invaild Username_"+username
-        
-
-Task = taskboss()
-here = (Task.get_task("huzaifa"))
-print(Task.complete_task("huzaifa",here[0]))
+            print("Incorrect usernsme or Password")
+        time.sleep(5)
+        quit()
