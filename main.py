@@ -1,10 +1,5 @@
 from task import taskboss # Huzaifa and fardan
 import time,datetime
-#,winsound
-
-#to playstartup sound
-#filename = 'myfile.wav'# replace myfile.wav with the audio file
-#winsound.PlaySound(filename, winsound.SND_FILENAME)# uncomment this
 
 # Creating an instance of the class taskboss
 Task = taskboss()
@@ -30,6 +25,7 @@ else:
 
 # If login is successfully
 print("Welcome "+username+"\n")
+Task.speak("Welcome "+username)
 
 if "True" in userdetails[0]:# if admin
     print("Select a User")

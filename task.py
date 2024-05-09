@@ -1,6 +1,16 @@
 from datetime import datetime
 import time
+from gtts import gTTS
 class taskboss():
+
+
+    def speak(text):
+        print("Assistant:",text)
+        tts = gTTS(text=text, lang="en")
+        filename = "voice"+str(text)+".mp3"
+        tts.save(filename)
+        playsound.playsound(filename)
+        os.remove(filename)
 
     def complete_task(self,user,c_task):
         print(c_task)
