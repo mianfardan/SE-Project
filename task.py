@@ -1,10 +1,10 @@
 from datetime import datetime
-import time
+import time,os,playsound
 from gtts import gTTS
 class taskboss():
 
 
-    def speak(text):
+    def speak(text):#new feature
         print("Assistant:",text)
         tts = gTTS(text=text, lang="en")
         filename = "voice"+str(text)+".mp3"
