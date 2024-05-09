@@ -24,7 +24,7 @@ else:
     userdetails = Task.login(username,input("Enter Password: "))#logging in returns a array
 
 # If login is successfully
-message = "Welcome "+username
+message = "Welcome "+str(username)
 print(message+"\n")
 Task.speak(message)
 

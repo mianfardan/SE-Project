@@ -1,16 +1,16 @@
 from datetime import datetime
-import time,os,playsound
+import time,os,pygame
 from gtts import gTTS
+pygame.init()
 class taskboss():
 
 
-    def speak(text):#new feature
-        print("Assistant:",text)
+    def speak(self,text):#new feature
         tts = gTTS(text=text, lang="en")
         filename = "voice"+str(text)+".mp3"
         tts.save(filename)
-        playsound.playsound(filename)
-        os.remove(filename)
+        music = pygame.mixer.music.load(filename)
+        pygame.mixer.music.play(1)
 
     def complete_task(self,user,c_task):
         print(c_task)
