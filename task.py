@@ -2,6 +2,50 @@ from datetime import datetime
 import time
 class taskboss():
 
+    def Indiviual_reporting(Self,user):
+        read = []
+        c = 0
+        p = 0
+        with open(user+".txt","r") as file:
+            line = file.readline().strip()
+            line = file.readline().strip()
+            while True:
+                line = file.readline().strip()
+                if line:
+                    read.append(line)
+                else:
+                    break
+        for k in range(0,len(read)):
+            if "*False" in read[i]:
+                p += 1
+            else:
+                c += 1
+            temp = ""
+            for i in range(0,len(read)):
+                if temp:
+                    if int(temp[temp.find("^")+1:len(temp)]) < int(read[i][read[i].find("^")+1:len(read[i])]):
+                        temp2 = read[i]
+                        read[i] = temp
+                        read[i-1] = temp2
+                        temp = ""
+                    elif (temp[temp.find("^")+1:len(temp)]) == int(read[i][read[i].find("^")+1:len(read[i])]):
+                        if datetime(datetime.strptime((temp[temp.find("$")+1:temp.find("*")]),'%Y-%m-%d %H:%M:%S.%f')) - datetime(datetime.strptime((read[i][read[i].find("$")+1:read[i].find("*")]),'%Y-%m-%d %H:%M:%S.%f')) > 0:
+                            temp2 = read[i]
+                            read[i] = temp
+                            read[i-1] = temp2
+                            temp = ""
+                temp = read[i]
+
+        for i in range(0,len(read)): 
+            read[i] = "Task name :"+read[i]
+            read[i] = read[i].replace("!"," | Date Assigen: ")
+            read[i] = read[i].replace("@"," | Assigen By: ")
+            read[i] = read[i].replace("#"," | Description: ")
+            read[i] = read[i].replace("$"," | Due Date: ")
+            read[i] = read[i].replace("*"," | Date Competed: ")
+            read[i] = read[i].replace("^"," | Priority: ")
+        return read,c,p
+
     def complete_task(self,user,c_task):
         print(c_task)
         reads = []
@@ -81,6 +125,8 @@ class taskboss():
         return report
 
     def signup(self,username,password):# Hammad
+        if len(username) <3 or len(password) < 3:
+            return "Detail too short"
         users = []
         with open("userdetail.txt","r") as file:#checking amount of users in system
             while True:

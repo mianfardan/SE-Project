@@ -8,15 +8,15 @@ task_list = []
 # Empty list to store user details
 userdetails = []
 
-# Prompting the user for username 
+# Prompting the user for username 9
 username = input("Enter username(Enter 'new' to make a new account): ")
 
-# If the user wants to create a new account  they  enter "420"
+# If the user wants to create a new account  they  enter "new"
 if username.lower() == "new":
     username = input("Enter a username: ")
     passcode = input("Enter a Password: ")
 
-    # Signing up a new user 
+    # Signing up a new user
     Task.signup(username,passcode)
     # Logging in the newly created user
     userdetails = Task.login(username,passcode)
@@ -40,7 +40,7 @@ if "True" in userdetails[0]:# if admin
 
     user = int(input())
 
-    print("Press 1: To add Task\nPress 2: To remove Task\nPress 3: To veiw Task\nPress 4: To Genarate Report of all users\nPress 5: To Make a admin\nPress 6: To mark task as done ")
+    print("Press 1: To add Task\nPress 2: To remove Task\nPress 3: To veiw Task\nPress 4: To Genarate Report of all users\nPress 5: To Make a admin\nPress 6: To mark task as done\nPress 7: For Indivual reporting ")
 
     op = int(input())
 
@@ -89,7 +89,7 @@ if "True" in userdetails[0]:# if admin
             time.sleep(1)
     elif op == 5:
         print(Task.make_admin(listOfUser[user]))
-    elif op ==6:#add compelete task here
+    elif op ==6:
         details = Task.get_task(listOfUser[user])
         if len(details) > 0:
             for detail in details:
@@ -98,6 +98,11 @@ if "True" in userdetails[0]:# if admin
             print(Task.complete_task(listOfUser[user],details[op]))
         else:
             print("All tasks are done")
+    elif op == 7:
+        lisOFTask,c,p = Task.Indiviual_reporting(listOfUser[user])
+        print(listOfUser[user]+" has "+c+" Task(s) compeleted and "+p+"Tasks pennding(s)")
+        for fardan in lisOFTask:
+            print(fardan)
     else:
         print("Please open your eyes and enter a valid entry")
 
