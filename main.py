@@ -145,7 +145,4 @@ else:# if not an admin
         Task.add_task(username,username,name,des,due,time.ctime(),str(priority))
     else:
         print("please only use the provide options")
-        time.sleep(5)
-
-
-                                         
+        time.sleep(5)                                   

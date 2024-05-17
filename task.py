@@ -101,8 +101,6 @@ class taskboss():
 
         return final
         
-
-
     def Indiviual_reporting(Self,user):
         read = []
         c = 0
@@ -226,19 +224,7 @@ class taskboss():
         return report
 
     def signup(self,username,password):# Hammad
-        """reads = [] make this code work
-        key = Fernet.generate_key()
-        f = Fernet(key)
-        reads.append(key)
-        for read in final:
-            read = read.encode()
-            reads.append(f.encrypt(read))
-
-        with open("Secure.txt","wb") as file:
-            file.write(reads[0])
-            for i in range(1,len(reads)):
-                file.write(b"\n")
-                file.write(reads[i])"""
+        lastkey = Fernet.generate_key()
         if len(username) <3 or len(password) < 3:
             return "Detail too short"
         users = []
@@ -251,19 +237,53 @@ class taskboss():
                     break
 
         if len(users) == 0:# deciding set admin or  not
-            is_admin = True
+            is_admin = "True"
             with open("userdetail.txt","a") as file:
                 file.write(str(username))
         else:
-            is_admin = False
+            is_admin = "False"
             with open("userdetail.txt","a") as file:
                 file.write("\n")
                 file.write(str(username))
+        k = Fernet(lastkey)
+        password = password.encode()
+        password = k.encrypt(password)
+        is_admin = is_admin.encode()
+        is_admin = k.encrypt(is_admin)
 
-        with open(username+".txt","a") as file:#creating user's own detail file and adding
-            file.write(str(password))
-            file.write("\n")
-            file.write(str(is_admin))
+        with open(username+".txt","ab") as file:
+            file.write(password)
+            file.write(b"\n")
+            file.write(is_admin)
+
+        reads = []
+        final = []
+        with open("Secure.txt","rb") as file:
+            while True:
+                line = file.readline().strip()
+                if line:
+                    reads.append(line)
+                else:
+                    break 
+        key = reads[0]
+        final.append(key)
+        f = Fernet(key)
+        reads.remove(reads[0])
+        for read in reads:
+            read = read.decode()
+            final.append(f.decrypt(read))
+        final.append(lastkey)
+
+        username = username.encode()
+        username = f.encrypt(username)
+        final.append(username)
+        final.append(lastkey)
+
+        with open("Secure.txt","wb") as file:
+            file.write(final[0])
+            for i in range(1,len(final)):
+                file.write(b"\n")
+                file.write(final[i])
         return "Account Created Successfully"
         
      # coded by huzaifa
@@ -371,6 +391,3 @@ class taskboss():
             print("Incorrect usernsme or Password")
         time.sleep(5)
         quit()
-
-T = taskboss()
-print(T.decrypt_data("fardan","Hello there"))
