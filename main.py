@@ -1,13 +1,5 @@
 from task import taskboss # Huzaifa and fardan
-<<<<<<< HEAD
-import time,datetime,winsound
-
-#to playstartup sound
-#filename = 'myfile.wav'# replace myfile.wav with the audio file
-#winsound.PlaySound(filename, winsound.SND_FILENAME)# uncomment this
-=======
 import time,datetime
->>>>>>> 2ba9f332bbadfbdc332a0f0e037b9e58908b57bd
 
 # Creating an instance of the class taskboss
 Task = taskboss()
@@ -48,11 +40,7 @@ if "True" in userdetails[0]:# if admin
 
     user = int(input())
 
-<<<<<<< HEAD
-    print("Press 1: To add Task\nPress 2: To remove Task\nPress 3: To veiw Task\nPress 4: To Genarate Report of all users\nPress 5: To Make a admin\nPress 6: To mark task as done ")
-=======
     print("Press 1: To add Task\nPress 2: To remove Task\nPress 3: To veiw Task\nPress 4: To Genarate Report of all users\nPress 5: To Make a admin\nPress 6: To mark task as done\nPress 7: For Indivual reporting ")
->>>>>>> 2ba9f332bbadfbdc332a0f0e037b9e58908b57bd
 
     op = int(input())
 
@@ -100,12 +88,6 @@ if "True" in userdetails[0]:# if admin
             print(report)
             time.sleep(1)
     elif op == 5:
-<<<<<<< HEAD
-
-        print(Task.make_admin(listOfUser[user]))
-    elif op ==6:#add compelete task here
-        pass
-=======
         print(Task.make_admin(listOfUser[user]))
     elif op ==6:
         details = Task.get_task(listOfUser[user])
@@ -123,7 +105,6 @@ if "True" in userdetails[0]:# if admin
             print(fardan)
     else:
         print("Please open your eyes and enter a valid entry")
->>>>>>> 2ba9f332bbadfbdc332a0f0e037b9e58908b57bd
 
 
         
@@ -161,16 +142,7 @@ else:# if not an admin
         now = datetime.datetime.today()
         due = now + datetime.timedelta(days=int(dates[0:loc]),hours=int(dates[loc+1:len(dates)]))
 
-<<<<<<< HEAD
-     # Viewing tasks for non-admin users
-    details = Task.get_task(username)
-    for detail in details:
-        print(detail)
-    
-    #add complete task here
-=======
         Task.add_task(username,username,name,des,due,time.ctime(),str(priority))
     else:
         print("please only use the provide options")
         time.sleep(5)                                   
->>>>>>> 2ba9f332bbadfbdc332a0f0e037b9e58908b57bd
