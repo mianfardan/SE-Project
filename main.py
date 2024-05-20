@@ -1,9 +1,13 @@
 from task import taskboss # Huzaifa and fardan
+<<<<<<< HEAD
 import time,datetime,winsound
 
 #to playstartup sound
 #filename = 'myfile.wav'# replace myfile.wav with the audio file
 #winsound.PlaySound(filename, winsound.SND_FILENAME)# uncomment this
+=======
+import time,datetime
+>>>>>>> 2ba9f332bbadfbdc332a0f0e037b9e58908b57bd
 
 # Creating an instance of the class taskboss
 Task = taskboss()
@@ -12,15 +16,15 @@ task_list = []
 # Empty list to store user details
 userdetails = []
 
-# Prompting the user for username 
-username = input("Enter username(Enter 420 to make a new account): ")
+# Prompting the user for username 9
+username = input("Enter username(Enter 'new' to make a new account): ")
 
-# If the user wants to create a new account  they  enter "420"
-if username == "420":
+# If the user wants to create a new account  they  enter "new"
+if username.lower() == "new":
     username = input("Enter a username: ")
     passcode = input("Enter a Password: ")
 
-    # Signing up a new user 
+    # Signing up a new user
     Task.signup(username,passcode)
     # Logging in the newly created user
     userdetails = Task.login(username,passcode)
@@ -44,7 +48,11 @@ if "True" in userdetails[0]:# if admin
 
     user = int(input())
 
+<<<<<<< HEAD
     print("Press 1: To add Task\nPress 2: To remove Task\nPress 3: To veiw Task\nPress 4: To Genarate Report of all users\nPress 5: To Make a admin\nPress 6: To mark task as done ")
+=======
+    print("Press 1: To add Task\nPress 2: To remove Task\nPress 3: To veiw Task\nPress 4: To Genarate Report of all users\nPress 5: To Make a admin\nPress 6: To mark task as done\nPress 7: For Indivual reporting ")
+>>>>>>> 2ba9f332bbadfbdc332a0f0e037b9e58908b57bd
 
     op = int(input())
 
@@ -92,18 +100,77 @@ if "True" in userdetails[0]:# if admin
             print(report)
             time.sleep(1)
     elif op == 5:
+<<<<<<< HEAD
 
         print(Task.make_admin(listOfUser[user]))
     elif op ==6:#add compelete task here
         pass
+=======
+        print(Task.make_admin(listOfUser[user]))
+    elif op ==6:
+        details = Task.get_task(listOfUser[user])
+        if len(details) > 0:
+            for detail in details:
+                print(detail)
+            op = int(input())
+            print(Task.complete_task(listOfUser[user],details[op]))
+        else:
+            print("All tasks are done")
+    elif op == 7:
+        lisOFTask,c,p = Task.Indiviual_reporting(listOfUser[user])
+        print(listOfUser[user]+" has "+c+" Task(s) compeleted and "+p+"Tasks pennding(s)")
+        for fardan in lisOFTask:
+            print(fardan)
+    else:
+        print("Please open your eyes and enter a valid entry")
+>>>>>>> 2ba9f332bbadfbdc332a0f0e037b9e58908b57bd
 
 
         
 else:# if not an admin
+    print("Press 1: To mark task complete or view task\nPress 2: To add Task")
+    op2 = int(input())
+    if op2 == 1:
+        details = Task.get_task(username)# Viewing tasks for non-admin users
+        for detail in details:
+            print(detail)
+        if len(details) > 0:
+            op = int(input())
+            print(Task.complete_task(username,details[op]))
+        else:
+            print("Respected "+username+",\nYou have not been assigned a new task yet.\nHave a great day.")
+    elif op2 == 2:
+        # Adding a new task
+        name = str(input("Enter Task name: "))
+        des = str(input("Enter a task description: "))
+        while True:
+            priority = int(input("Enter a priority from 1 to 10 where 10 is high priority "))
+            if priority >= 1 and priority <= 10:
+                break
+            else:
+                print("You have enter a invaild entry\nTry Agian")
+                time.sleep(1)
+        while True:
+            dates = str(input("Enter the given days and hours in dd/hh: "))
+            if "/" in dates and len(dates) >= 3:
+                break
+            else:
+                print("You have enter a invaild entry\nTry Agian")
+                time.sleep(1)
+        loc = dates.find("/")
+        now = datetime.datetime.today()
+        due = now + datetime.timedelta(days=int(dates[0:loc]),hours=int(dates[loc+1:len(dates)]))
 
+<<<<<<< HEAD
      # Viewing tasks for non-admin users
     details = Task.get_task(username)
     for detail in details:
         print(detail)
     
     #add complete task here
+=======
+        Task.add_task(username,username,name,des,due,time.ctime(),str(priority))
+    else:
+        print("please only use the provide options")
+        time.sleep(5)                                   
+>>>>>>> 2ba9f332bbadfbdc332a0f0e037b9e58908b57bd
