@@ -18,7 +18,7 @@ class taskboss():
             result = result[1:len(result)]
             temp += chr(hold)
         
-    def Indiviual_reporting(self,user):#error is here
+    def Indiviual_reporting(self,user):
         read = []
         c = 0
         p = 0
