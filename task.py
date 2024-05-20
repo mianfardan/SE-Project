@@ -1,110 +1,28 @@
 from datetime import datetime
 import time
-from cryptography.fernet import Fernet
 class taskboss():
 
-    def encrypt_data(self,username,data):
-        reads=[]
-        final = []
-        with open("Secure.txt","rb") as file:
-            while True:
-                line = file.readline().strip()
-                if line:
-                    reads.append(line)
-                else:
-                    break
-        key = reads[0]
-        reads.remove(key)
-        f = Fernet(key)
-        for read in reads:
-            read =f.decrypt(read)
-            final.append(read.decode())
-
-        found = False
-        for read in final:
-            if username in read and found == False:
-                found = True
-            elif found == True:
-                ans = read#the key to the file
-                break
-        reads = []
-        final = []
-        with (username+".txt","rb") as file:
-            while True:
-                line = file.readline().strip()
-                if line:
-                    reads.append(line)
-                else:
-                    break
-
-        key = ans
-        f = Fernet(key)
-        for read in reads:
-            read =f.decrypt(read)
-            final.append(read.decode())
-        final.append(data)
-
-        for read in final:
-            read = read.encode()
-            read = f.encrypt(read)
-            reads.append(read)
-
-        with(username+".txt","wb") as file:
-            file.write(reads[0])
-            for i in range(1,len(reads)):
-                file.write(b"\n")
-                file.write(reads[i])
-
-        return "done"
-            
-
-
-    def decrypt_data(self,username):
-        reads=[]
-        final = []
-        with open("Secure.txt","rb") as file:
-            while True:
-                line = file.readline().strip()
-                if line:
-                    reads.append(line)
-                else:
-                    break
-        key = reads[0]
-        reads.remove(key)
-        f = Fernet(key)
-        for read in reads:
-            read =f.decrypt(read)
-            final.append(read.decode())
-
-        found = False
-        for read in final:
-            if username in read and found == False:
-                found = True
-            elif found == True:
-                ans = read#the key to the file
-                break
-        reads = []
-        final = []
-        with (username+".txt","rb") as file:
-            while True:
-                line = file.readline().strip()
-                if line:
-                    reads.append(line)
-                else:
-                    break
-
-        key = ans
-        f = Fernet(key)
-        for read in reads:
-            read =f.decrypt(read)
-            final.append(read.decode())
-
-        return final
+    def encode_filename(self,temp):
+        result = ""
+        for i in range(0,len(temp)):
+            hold = ord(temp[0:1])
+            hold += 1590
+            temp = temp[1:len(temp)]
+            result += chr(hold)
+        return result
+    
+    def decode_filename(self):
+        for i in range(0,len(result)):
+            hold = ord(result[0:1])
+            hold -= 1590
+            result = result[1:len(result)]
+            temp += chr(hold)
         
-    def Indiviual_reporting(Self,user):
+    def Indiviual_reporting(self,user):#error is here
         read = []
         c = 0
         p = 0
+        user = self.encode_filename(user)
         with open(user+".txt","r") as file:
             line = file.readline().strip()
             line = file.readline().strip()
@@ -151,6 +69,7 @@ class taskboss():
         temp = ""
         loc = c_task.find("|")
         find = c_task[20:loc-1]
+        user = self.encode_filename(user)
         with open(user+".txt","r") as file:
             while True:
                 line = file.readline().strip()
@@ -186,7 +105,7 @@ class taskboss():
                     break
 
         reads[1] = "True"
-
+        user = self.encode_filename(user)
         with open(user+".txt","w") as file:
             file.write(reads[0])
             for i in range(1,len(reads)):
@@ -202,6 +121,7 @@ class taskboss():
             c = 0
             t = 0
             p = 0
+            user = self.encode_filename(user)
             with open(user+".txt","r") as file :
                 line = file.readline().strip()
                 line = file.readline().strip()
@@ -224,7 +144,6 @@ class taskboss():
         return report
 
     def signup(self,username,password):# Hammad
-        lastkey = Fernet.generate_key()
         if len(username) <3 or len(password) < 3:
             return "Detail too short"
         users = []
@@ -245,45 +164,12 @@ class taskboss():
             with open("userdetail.txt","a") as file:
                 file.write("\n")
                 file.write(str(username))
-        k = Fernet(lastkey)
-        password = password.encode()
-        password = k.encrypt(password)
-        is_admin = is_admin.encode()
-        is_admin = k.encrypt(is_admin)
-
-        with open(username+".txt","ab") as file:
+        username = self.encode_filename(username)
+        with open(username+".txt","a") as file:
             file.write(password)
-            file.write(b"\n")
+            file.write("\n")
             file.write(is_admin)
 
-        reads = []
-        final = []
-        with open("Secure.txt","rb") as file:
-            while True:
-                line = file.readline().strip()
-                if line:
-                    reads.append(line)
-                else:
-                    break 
-        key = reads[0]
-        final.append(key)
-        f = Fernet(key)
-        reads.remove(reads[0])
-        for read in reads:
-            read = read.decode()
-            final.append(f.decrypt(read))
-        final.append(lastkey)
-
-        username = username.encode()
-        username = f.encrypt(username)
-        final.append(username)
-        final.append(lastkey)
-
-        with open("Secure.txt","wb") as file:
-            file.write(final[0])
-            for i in range(1,len(final)):
-                file.write(b"\n")
-                file.write(final[i])
         return "Account Created Successfully"
         
      # coded by huzaifa
@@ -292,6 +178,7 @@ class taskboss():
         reads = []
         loc = r_task.find("|")
         find = r_task[20:loc-1]
+        username = self.encode_filename(username)
         with open(username+".txt","r") as file:
             while True:
                 line = file.readline().strip()
@@ -315,6 +202,7 @@ class taskboss():
         return "Successfull"
     
     def add_task(self,touser,username,name,des,due,now,priority): #adding tasks to other people's tasklist huzaifa
+        touser = self.encode_filename(touser)
         with open(touser+".txt","a") as file:
             content = str(name)+"!"+str(now)+"@"+str(username)+"#"+str(des)+"$"+str(due)+"*False"+"^"+priority
             file.write("\n")
@@ -322,6 +210,7 @@ class taskboss():
 
     def get_task(self,username):  #getting all tasks from the users tasklist zoha
         read = []
+        username = self.encode_filename(username)
         with open(username+".txt","r") as file:
             line = file.readline().strip()
             line = file.readline().strip()
@@ -375,6 +264,7 @@ class taskboss():
     def login(self,username,password):  # logging in zoha
         read = []
         try:
+            username = self.encode_filename(username)
             with open(username+".txt","r") as file:
                 line = file.readline().strip()
                 if password == line:
