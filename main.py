@@ -84,8 +84,11 @@ if "True" in userdetails[0]:# if admin
         # Viewing tasks 
     elif op == 3:# add code for empty array
         details = Task.get_task(listOfUser[user])
-        for detail in details:
-            print(detail)
+        if len(details) > 0:
+            for detail in details:
+                print(detail)
+        else:
+            print(listOfUser[user]+" no Task")
     elif op == 2:
         # Removing a task
         details = Task.get_task(listOfUser[user])
