@@ -88,7 +88,7 @@ if "True" in userdetails[0]:# if admin
             for detail in details:
                 print(detail)
         else:
-            print(listOfUser[user]+" no Task")
+            print(listOfUser[user]+" has no Task")
     elif op == 2:
         # Removing a task
         details = Task.get_task(listOfUser[user])
