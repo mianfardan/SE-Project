@@ -12,6 +12,7 @@ class taskboss():
         return result
     
     def decode_filename(self,result):
+        temp = ""
         for i in range(0,len(result)):
             hold = ord(result[0:1])
             hold -= 1590
@@ -34,7 +35,7 @@ class taskboss():
                 else:
                     break
         for k in range(0,len(read)):
-            if "*False" in read[k]:
+            if "*False" in read[i]:
                 p += 1
             else:
                 c += 1
@@ -117,7 +118,7 @@ class taskboss():
     def reporting(self):# Fardan
         report = []
         username = self.admin_list()
-        for user in username:
+        for user in username: 
             all_task = []
             c = 0
             t = 0
@@ -139,8 +140,7 @@ class taskboss():
                 if "*False" in tasks:
                     p += 1
             c = t - p
-            for i in range(0,len(username)):
-                username[i] = self.decode_filename(username[i])
+            user = self.decode_filename(user)
 
             report.append(user+" has "+str(t)+" Task(s) and have completed "+str(c)+" Task(s) and has "+str(p)+" Pendding Task(s)")
     
