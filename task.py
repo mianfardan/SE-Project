@@ -107,7 +107,6 @@ class taskboss():
                     break
 
         reads[1] = "True"
-        user = self.encode_filename(user)
         with open(user+".txt","w") as file:
             file.write(reads[0])
             for i in range(1,len(reads)):
