@@ -11,12 +11,13 @@ class taskboss():
             result += chr(hold)
         return result
     
-    def decode_filename(self):
+    def decode_filename(self,result):
         for i in range(0,len(result)):
             hold = ord(result[0:1])
             hold -= 1590
             result = result[1:len(result)]
             temp += chr(hold)
+        return temp
         
     def Indiviual_reporting(self,user):
         read = []
