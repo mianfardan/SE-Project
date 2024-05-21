@@ -24,7 +24,8 @@ else:
     userdetails = Task.login(username,input("Enter Password: "))#logging in returns a array
 
 # If login is successfully
-print("Welcome "+username)
+print("\nWelcome "+username+"\n")
+time.sleep(.5)
 
 if "True" in userdetails[0]:# if admin
     print("Select a User")
@@ -40,9 +41,21 @@ if "True" in userdetails[0]:# if admin
 
     user = int(input())
 
-    print("Press 1: To add Task\nPress 2: To remove Task\nPress 3: To veiw Task\nPress 4: To Genarate Report of all users\nPress 5: To Make a admin\nPress 6: To mark task as done\nPress 7: For Indivual reporting ")
-
+    print("\nPress 1: To add Task")
+    time.sleep(.1)
+    print("Press 2: To remove Task")
+    time.sleep(.1)
+    print("Press 3: To veiw Task")
+    time.sleep(.1)
+    print("Press 4: To Genarate Report of all users")
+    time.sleep(.1)
+    print("Press 5: To Make a admin")
+    time.sleep(.1)
+    print("Press 6: To mark task as done")
+    time.sleep(.1)
+    print("Press 7: For Indivual reporting")
     op = int(input())
+    print("\n")
 
     if op == 1 :
         # Adding a new task
@@ -100,7 +113,7 @@ if "True" in userdetails[0]:# if admin
             print("All tasks are done")
     elif op == 7:
         lisOFTask,c,p = Task.Indiviual_reporting(listOfUser[user])
-        print(listOfUser[user]+" has "+c+" Task(s) compeleted and "+p+"Tasks pennding(s)")
+        print(listOfUser[user]+" has "+str(c)+" Task(s) compeleted and "+str(p)+"Tasks pennding(s)")
         for fardan in lisOFTask:
             print(fardan)
     else:
@@ -109,8 +122,9 @@ if "True" in userdetails[0]:# if admin
 
         
 else:# if not an admin
-    print("Press 1: To mark task complete or view task\nPress 2: To add Task")
+    print("\nPress 1: To mark task complete or view task\nPress 2: To add Task")
     op2 = int(input())
+    print("\n")
     if op2 == 1:
         details = Task.get_task(username)# Viewing tasks for non-admin users
         for detail in details:
