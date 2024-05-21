@@ -96,6 +96,7 @@ class taskboss():
 
     def make_admin(self,user):# Fardan
         reads = []
+        user = self.encode_filename(user)
         with open(user+".txt","r") as file:
             while True:
                 line = file.readline().strip()
@@ -138,6 +139,8 @@ class taskboss():
                 if "*False" in tasks:
                     p += 1
             c = t - p
+            for i in range(0,len(username)):
+                username[i] = self.decode_filename(username[i])
 
             report.append(user+" has "+str(t)+" Task(s) and have completed "+str(c)+" Task(s) and has "+str(p)+" Pendding Task(s)")
     
