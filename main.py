@@ -8,7 +8,7 @@ task_list = []
 # Empty list to store user details
 userdetails = []
 
-# Prompting the user for username 9
+# Prompting the user for username 
 username = input("Enter username(Enter 'new' to make a new account): ")
 
 # If the user wants to create a new account  they  enter "new"
