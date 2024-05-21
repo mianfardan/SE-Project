@@ -2,7 +2,7 @@ from datetime import datetime
 import time
 class taskboss():
 
-    def encode_filename(self,temp):
+    def encode_filename(self,temp): # Huzaifa
         result = ""
         for i in range(0,len(temp)):
             hold = ord(temp[0:1])
@@ -11,14 +11,14 @@ class taskboss():
             result += chr(hold)
         return result
     
-    def decode_filename(self):
+    def decode_filename(self): # Huzaifa
         for i in range(0,len(result)):
             hold = ord(result[0:1])
             hold -= 1590
             result = result[1:len(result)]
             temp += chr(hold)
         
-    def Indiviual_reporting(self,user):
+    def Indiviual_reporting(self,user): # Zoha Amir
         read = []
         c = 0
         p = 0
@@ -63,7 +63,7 @@ class taskboss():
             read[i] = read[i].replace("^"," | Priority: ")
         return read,c,p
 
-    def complete_task(self,user,c_task):
+    def complete_task(self,user,c_task): # Hammad
         print(c_task)
         reads = []
         temp = ""
@@ -94,7 +94,7 @@ class taskboss():
                 file.write(read)
         return "Sucessfull"
 
-    def make_admin(self,user):# Fardan
+    def make_admin(self,user):# Mian Fardan 
         reads = []
         with open(user+".txt","r") as file:
             while True:
@@ -113,7 +113,7 @@ class taskboss():
                 file.write(reads[i])
         return "Successfull"
 
-    def reporting(self):# Fardan
+    def reporting(self):# Huzaifa
         report = []
         username = self.admin_list()
         for user in username:
@@ -143,7 +143,7 @@ class taskboss():
     
         return report
 
-    def signup(self,username,password):# Hammad
+    def signup(self,username,password):# Zoha Amir
         if len(username) <3 or len(password) < 3:
             return "Detail too short"
         users = []
@@ -171,10 +171,10 @@ class taskboss():
             file.write(is_admin)
 
         return "Account Created Successfully"
-        
-     # coded by huzaifa
+    
+    # Hammad Remove Task
 
-    def remove_task(self,r_task,username): #removing a particular task from the list Huzaifa
+    def remove_task(self,r_task,username): #removing a particular task from the list 
         reads = []
         loc = r_task.find("|")
         find = r_task[20:loc-1]
@@ -201,14 +201,18 @@ class taskboss():
 
         return "Successfull"
     
-    def add_task(self,touser,username,name,des,due,now,priority): #adding tasks to other people's tasklist huzaifa
+    # Muhymin Alam
+    
+    def add_task(self,touser,username,name,des,due,now,priority): #adding tasks to other people's tasklist
         touser = self.encode_filename(touser)
         with open(touser+".txt","a") as file:
             content = str(name)+"!"+str(now)+"@"+str(username)+"#"+str(des)+"$"+str(due)+"*False"+"^"+priority
             file.write("\n")
             file.write(content)
 
-    def get_task(self,username):  #getting all tasks from the users tasklist zoha
+     # Muhymin Alam
+
+    def get_task(self,username):  #getting all tasks from the users tasklist
         read = []
         username = self.encode_filename(username)
         with open(username+".txt","r") as file:
@@ -248,9 +252,9 @@ class taskboss():
             read[i] = read[i].replace("^"," | Priority: ")
         return read
     
-    # coded by mian fardan
+    # Hammad
     
-    def admin_list(self):  #returning list of all registered users Abdul...
+    def admin_list(self):  #returning list of all registered users
        reads = []
        with open("userdetail.txt","r") as file:
             while True:
@@ -261,7 +265,7 @@ class taskboss():
                     return reads
                 
             
-    def login(self,username,password):  # logging in zoha
+    def login(self,username,password):  # Mian Fardan
         read = []
         try:
             username = self.encode_filename(username)
